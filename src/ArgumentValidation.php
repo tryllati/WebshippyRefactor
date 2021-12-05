@@ -15,7 +15,6 @@ class ArgumentValidation{
         $this->Argument = $Argument;
     }
 
-
     public function isArgument($required_argument_number = 0): bool {
         $isset_argument = $this->Argument->getArgument($required_argument_number);
 

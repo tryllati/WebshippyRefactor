@@ -25,6 +25,14 @@ class CsvFile extends File{
         $this->rows = [];
     }
 
+    public function getHeaders(): array {
+        return $this->headers;
+    }
+    
+    public function getRows(): array {
+        return $this->rows;
+    }
+
     public function readAndSplitHeader(){
         $this->read();
 
@@ -42,8 +50,8 @@ class CsvFile extends File{
     }
 
     public function readWithOriginal(){
-        $this-resetHeaders();
-        $this-resetRows();
+        $this->resetHeaders();
+        $this->resetRows();
 
         if(!$this->fileExist()){
             $error = 1;
@@ -82,4 +90,6 @@ class CsvFile extends File{
         }
         return false;
     }
+
+    
 }

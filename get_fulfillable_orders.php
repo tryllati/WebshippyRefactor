@@ -2,9 +2,11 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+use webshippy\Ordering;
 use webshippy\Argument;
 use webshippy\ArgumentValidation;
 use webshippy\File\CsvFile;
+use webshippy\FulfillableOrder; 
 
 
 $Argument = new Argument($argv);
@@ -17,8 +19,13 @@ if(!$ArgumentValidation->argumentIsJson(1)){
 
 $CsvFile = new CsvFile('orders.csv');
 $CsvFile->setFilePath(__DIR__);
-//$CsvFile->readAndSplitHeader();
 $CsvFile->readWithOriginal();
+
+$FulfillableOrder = new FulfillableOrder();
+$FulfillableOrder->setOrders($CsvFile->getRows());
+$FulfillableOrder->settingFulFillablOrders();
+//$FulfillableOrder->getOrders();
+
 
 
 ?>
