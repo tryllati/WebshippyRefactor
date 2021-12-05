@@ -9,7 +9,7 @@ class ArgumentTest extends TestCase{
     public function testCreateArgumnt()
     {	
 
-        //global $argv, $argc;
+        global $argv, $argc;
 
         $Argument = new Argument($argv);
         $ArgumentValidation = new ArgumentValidation($Argument);
