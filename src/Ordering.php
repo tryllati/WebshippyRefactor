@@ -9,13 +9,13 @@ class Ordering{
     private $priority;
     private $created_at;
 
+    
     function __construct($product_id, $quantity, $priority, $created_at){
         $this->product_id = $product_id;
         $this->quantity = $quantity;
         $this->priority = $priority;
         $this->created_at = $created_at;
     }
-
 
     public function getProductId(): string {
         return $this->product_id;
@@ -49,6 +49,13 @@ class Ordering{
         $this->created_at = $created_at;
     }
 
-
+    public function getValueOfHeader($name): string {
+        switch ($name){
+            case 'product_id' : return $this->getProductId();
+            case 'quantity'   : return $this->getQuantity();
+            case 'priority'   : return $this->getPriority();
+            case 'created_at' : return $this->getCreatedAt();
+        }
+    }
 
 }

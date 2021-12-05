@@ -2,11 +2,11 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use webshippy\Ordering;
 use webshippy\Argument;
 use webshippy\ArgumentValidation;
 use webshippy\File\CsvFile;
 use webshippy\FulfillableOrder; 
+use webshippy\PrintFulfillableOrder; 
 
 
 $Argument = new Argument($argv);
@@ -24,8 +24,9 @@ $CsvFile->readWithOriginal();
 $FulfillableOrder = new FulfillableOrder();
 $FulfillableOrder->setOrders($CsvFile->getRows());
 $FulfillableOrder->settingFulFillablOrders();
-//$FulfillableOrder->getOrders();
 
-
+$PrintFulfillableOrder = new PrintFulfillableOrder();
+$PrintFulfillableOrder->printHeaderData($CsvFile->getHeaders());
+$PrintFulfillableOrder->printOrders($Argument->getJsonDecodedArgument(1), $CsvFile->getHeaders(), $FulfillableOrder->getOrders());
 
 ?>

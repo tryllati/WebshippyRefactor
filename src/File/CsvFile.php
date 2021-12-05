@@ -5,23 +5,23 @@ namespace webshippy\File;
 /*Default File Class*/
 class CsvFile extends File{
 
-    protected $headers = [];
-    protected $rows = [];
+    protected Array $headers = [];
+    protected Array $rows = [];
 
     protected $error = null;
-    protected $error_message = '';
+    protected String $error_message = '';
 
 
-    function __construct($file_name){
+    function __construct(String $file_name){
         parent::__construct($file_name);
     }
 
     
-    public function resetHeaders(){
+    public function resetHeaders(): void {
         $this->headers = [];
     }
     
-    public function resetRows(){
+    public function resetRows(): void {
         $this->rows = [];
     }
 
@@ -33,14 +33,14 @@ class CsvFile extends File{
         return $this->rows;
     }
 
-    public function readAndSplitHeader(){
+    public function readAndSplitHeader(): void {
         $this->read();
 
         $this->headers = $this->rows[0];
         unset($this->rows[0]);
     }
 
-    public function read(){
+    public function read(): void {
         if(!$this->fileExist()){
             $error = 1;
             $this->error_message = 'A fájl nem található';
@@ -49,12 +49,12 @@ class CsvFile extends File{
         $this->readWithStrGetCsv();
     }
 
-    public function readWithOriginal(){
+    public function readWithOriginal(): void {
         $this->resetHeaders();
         $this->resetRows();
 
         if(!$this->fileExist()){
-            $error = 1;
+            $this->error = 1;
             $this->error_message = 'A fájl nem található';
         }
 
@@ -76,7 +76,7 @@ class CsvFile extends File{
         }
     }
 
-    public function readWithStrGetCsv(){
+    public function readWithStrGetCsv(): void{
         $csvFile = file($this->getFullFileName());
 
         foreach ($csvFile as $line) {

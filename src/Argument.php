@@ -4,10 +4,11 @@ namespace webshippy;
 
 class Argument{
 
-    private $argument;
+    private Array $argument;
     private $argument_count;
 
-    function __construct($argv){
+    
+    function __construct(Array $argv){
         $this->argument = $argv;
         $this->setArgumentCount();
     }
@@ -18,6 +19,10 @@ class Argument{
         }
 
         return false;
+    }
+
+    public function getJsonDecodedArgument($number): object{
+        return json_decode($this->argument[$number]);
     }
 
     public function setArgument($argument): void {
